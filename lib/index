@@ -1,0 +1,76 @@
+
+void main(){
+   // method1();
+  method2();
+}
+
+/**
+ * 定义字符串
+ * '''''' 三引号可以显示换行
+ * 字符串拼接
+ * 数据类型
+ */
+void method1(){
+   var str1 = "1111";
+   print(str1);
+   var str2 = '''
+        Hello World
+        Welcone
+   ''';
+   print(str2);
+
+   print("$str1 $str2");
+
+   var num1 = 12; //int 型
+   var num2 = 12.2; //double 型
+   print(num1);
+   print(num2);
+
+   var boo1 = false;
+   print(boo1);
+
+   //数组的操作
+   var list1 = [1,2,3];
+   print(list1);
+   print(list1.length);
+   print(list1[0]);
+
+   var list2 = new List<String>();
+   list2.add("test");
+   print(list2);
+
+   //map的操作
+   var map1 = {
+      "key1":1,
+      "key2":2
+   };
+   print(map1);
+   print(map1["key1"]);
+
+   var map2 = new Map();
+   map2["key1"] = 45;
+   print(map2["key1"]);
+
+   if(map2 is Map){
+      print("map2 是 Map 类型");
+   }
+}
+
+/***
+ * 运算符
+ */
+void method2(){
+   var a;
+   print(a);
+   print(a??0);
+
+   a??=20;
+   print(a);
+
+
+   var str1 = "123"
+   var num1 = int.parse(str1)
+
+   str1.isEmpty
+   str1.isNan
+}
