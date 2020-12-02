@@ -1,7 +1,8 @@
 
 void main(){
    // method1();
-  method2();
+  // method2();
+   method3();
 }
 
 /**
@@ -68,9 +69,19 @@ void method2(){
    print(a);
 
 
-   var str1 = "123"
-   var num1 = int.parse(str1)
+   var str1 = "123";
+   var num1 = int.parse(str1);
 
-   str1.isEmpty
-   str1.isNan
+   print(str1.isEmpty);
+   // print(str1.isNan);
+}
+
+/**
+ * 操作集合
+ */
+void method3(){
+   var list1 = ["1","2","3","4"];
+   print(list1);
+   print(list1.reversed);
+   print(list1.reversed.toList());
 }
