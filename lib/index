@@ -1,8 +1,8 @@
 
 void main(){
-   // method1();
+   method1();
   // method2();
-   method3();
+  //  method3();
 }
 
 /**
@@ -19,6 +19,9 @@ void method1(){
         Welcone
    ''';
    print(str2);
+
+   const str3 = "33333";
+   print(str3);
 
    print("$str1 $str2");
 
