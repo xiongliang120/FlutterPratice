@@ -1,8 +1,10 @@
 
 void main(){
-   method1();
+   // method1();
   // method2();
   //  method3();
+  //  method5(method4x());
+   method6();
 }
 
 /**
@@ -39,6 +41,7 @@ void method1(){
    print(list1.length);
    print(list1[0]);
 
+   //集合
    var list2 = new List<String>();
    list2.add("test");
    print(list2);
@@ -87,4 +90,77 @@ void method3(){
    print(list1);
    print(list1.reversed);
    print(list1.reversed.toList());
+   list1.addAll(["5","6"]);
+   var index = list1.indexOf("5");
+   print(index);
+   list1.fillRange(0,2,"0");
+   print(list1);
+
+   //set 集合
+   var set1 = new Set();
+   set1.add("1");
+   set1.add("2");
+   print(set1);
+
+   //forEach 遍历
+   list1.forEach((value){
+      print(value);
+   });
 }
+
+/**
+ * 可选参数,[] 包着可选参数
+ */
+void method4(String name,[int age=10]){
+   print(name);
+}
+
+method4x(){
+   print("method4_1");
+}
+/**
+ * 方法作为方法参数
+ */
+void method5(fn){
+   fn();
+}
+
+/**
+ * 闭包
+ */
+void method6(){
+   var a = 123;
+   var b=(){
+      a++;
+      print(a);
+   };
+   b();
+   print(a);
+}
+
+void method1(){
+   var person = new Person();
+   person.printName();
+   print("age= ${Person.age}");
+}
+
+class Person{
+   var name = "11";
+   static var age = 29;
+
+   void printName(){
+      print(name);
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
