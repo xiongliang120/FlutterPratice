@@ -1,8 +1,63 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  // runApp(MyApp());
+  method1();
 }
+
+void method1(){
+    // runApp(new Center(
+    //     child:new Text(
+    //         "Flutter控件",
+    //         textDirection:TextDirection.ltr
+    //     )
+    // ));
+  
+  // runApp(Custome1());
+  
+  runApp(Custome2());
+}
+
+/**
+ * 自定义组件
+ */
+class Custome1 extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+     return new Center(
+         child:new Text(
+             "Flutter控件",
+             textDirection:TextDirection.rtl,
+             style:new TextStyle(
+               color: Colors.blue,
+               fontSize: 40
+             )
+         )
+     );
+  }
+}
+
+/**
+ * 自定义组件, 添加导航栏
+ */
+class Custome2 extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+         appBar: AppBar(
+           title: Text("Flutter Title")
+         ),
+          body:Custome1()
+      ),
+      theme: ThemeData(
+          primaryColor: Colors.green
+      )
+    );
+  }
+}
+
+
 
 
 
