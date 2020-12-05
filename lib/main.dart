@@ -5,61 +5,153 @@ void main() {
   method1();
 }
 
-void method1(){
-    // runApp(new Center(
-    //     child:new Text(
-    //         "Flutter控件",
-    //         textDirection:TextDirection.ltr
-    //     )
-    // ));
-  
+void method1() {
+  // runApp(new Center(
+  //     child:new Text(
+  //         "Flutter控件",
+  //         textDirection:TextDirection.ltr
+  //     )
+  // ));
+
   // runApp(Custome1());
-  
-  runApp(Custome2());
+
+  runApp(Custome2(text: "111"));
 }
 
 /**
  * 自定义组件
+ * 添加多个组件,通过Column包含多个组件.
+ * FlatButton 通过onPressd监听点击事件, Navigator.push() 跳转到别的页面.
+ *
  */
-class Custome1 extends StatelessWidget{
+class Custome1 extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
-     return new Center(
-         child:new Text(
-             "Flutter控件",
-             textDirection:TextDirection.rtl,
-             style:new TextStyle(
-               color: Colors.blue,
-               fontSize: 40
-             )
-         )
-     );
+    return new Column(children: [
+      new Text("Flutter控件",
+          textDirection: TextDirection.rtl,
+          style: new TextStyle(color: Colors.blue, fontSize: 40)),
+      FlatButton(
+        child: Text(
+          "flatButton 点击",
+          style: TextStyle(color: Colors.black, fontSize: 23.0, height: 1.6),
+        ),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        color: Colors.red,
+        highlightColor: Colors.blue[700],
+        colorBrightness: Brightness.dark,
+        splashColor: Colors.grey,
+        onPressed: () {
+          //导航到新路由
+          // Navigator.push(context, MaterialPageRoute(builder: (context)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return MyApp();
+          }));
+        },
+      ),
+      Image(
+        width: 100.0,
+        height: 100.0,
+        image: AssetImage("imgs/avatar.png"),
+      ),
+
+      SwitchAndCheckboxWidget(),
+
+      LinearProgressIndicator(
+        backgroundColor: Colors.grey,
+        valueColor: AlwaysStoppedAnimation(Colors.green),
+        value: .5,
+      ),
+
+      //自定义CircularProgressIndicator的大小
+      SizedBox(
+         height: 30.0,
+         width: 30.0,
+         child: CircularProgressIndicator(
+           backgroundColor: Colors.grey,
+           valueColor: AlwaysStoppedAnimation(Colors.green),
+           value: .5,
+         ) ,
+      )
+
+
+    ]);
   }
 }
 
 /**
- * 自定义组件, 添加导航栏
+ * 自定义单选框以及复选框
  */
-class Custome2 extends StatelessWidget{
+class SwitchAndCheckboxWidget extends StatefulWidget{
+  @override
+  _SwitchAndCheckboxWidget createState() {
+    return new _SwitchAndCheckboxWidget();
+  }
+}
+
+class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget>{
+  var switchStatus = true;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-         appBar: AppBar(
-           title: Text("Flutter Title")
-         ),
-          body:Custome1()
-      ),
-      theme: ThemeData(
-          primaryColor: Colors.green
-      )
+    return Column(
+       children: [
+           Switch(
+             value: switchStatus,
+             onChanged: (value){
+                setState(() {
+                    switchStatus = value;
+                });
+             },
+           ),
+           Checkbox(
+             value: switchStatus,
+             activeColor: Colors.red,
+             onChanged: (value){
+               setState(() {
+                   switchStatus = value;
+               });
+             }
+           ),
+           TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                 labelText: "用户名",
+                 prefixIcon: Icon(Icons.person)
+              ),
+              onChanged: (value){
+                 print("输入框内容$value");
+              },
+           )
+       ],
     );
   }
 }
 
 
 
+/**
+ * 自定义组件, 添加导航栏
+ */
+class Custome2 extends StatelessWidget {
+  /**
+   * 自定义构造函数
+   */
+  Custome2({Key key, @required this.text, this.backgroundColor: Colors.amber})
+      : super(key: key);
 
+  String text;
+  Color backgroundColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(appBar: AppBar(title: Text("$text")), body: Custome1()),
+        theme: ThemeData(primaryColor: backgroundColor));
+  }
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
