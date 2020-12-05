@@ -16,7 +16,6 @@ void method1() {
   // runApp(Custome1());
 
   runApp(Custome2(text: "111"));
-  //  runApp(MyListView1());
 }
 
 /**
@@ -54,7 +53,8 @@ class Custome1 extends StatelessWidget {
       Image(
         width: 100.0,
         height: 100.0,
-        image: AssetImage("imgs/avatar.png"),
+        image: AssetImage("imgs/avatar.png",),
+        fit: BoxFit.fill,
       ),
 
       SwitchAndCheckboxWidget(),
@@ -176,8 +176,7 @@ class MyListView1 extends StatelessWidget {
   Widget build(BuildContext context) {
     // return ListView.builder(
     //   itemCount: 100,
-    //   itemExtent: 50.0, //item 高度
-    //   itemBuilder: (BuildContext context,int index){
+    //   itemBuilder: (context,index){
     //      return ListTile(title: Text("title$index"));
     //   },
     // );
@@ -188,6 +187,7 @@ class MyListView1 extends StatelessWidget {
     return ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
+            leading: Icon(Icons.person),
             title: Text(
               "$index",
               textDirection: TextDirection.ltr,
@@ -197,7 +197,9 @@ class MyListView1 extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return index % 2 == 0 ? divider1 : divider2;
         },
-        itemCount: 100);
+        itemCount: 100,
+        scrollDirection:Axis.vertical ,
+    );
   }
 }
 
@@ -263,7 +265,7 @@ class Custome2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(appBar: AppBar(title: Text("$text")), body: Custome1()),
+        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyListView1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
