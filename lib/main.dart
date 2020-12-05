@@ -16,6 +16,7 @@ void method1() {
   // runApp(Custome1());
 
   runApp(Custome2(text: "111"));
+  //  runApp(MyListView1());
 }
 
 /**
@@ -25,8 +26,6 @@ void method1() {
  *
  */
 class Custome1 extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return new Column(children: [
@@ -68,69 +67,185 @@ class Custome1 extends StatelessWidget {
 
       //自定义CircularProgressIndicator的大小
       SizedBox(
-         height: 30.0,
-         width: 30.0,
-         child: CircularProgressIndicator(
-           backgroundColor: Colors.grey,
-           valueColor: AlwaysStoppedAnimation(Colors.green),
-           value: .5,
-         ) ,
+        height: 30.0,
+        width: 30.0,
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.grey,
+          valueColor: AlwaysStoppedAnimation(Colors.green),
+          value: .5,
+        ),
+      ),
+      //弹性布局
+      Flex(
+        direction: Axis.horizontal,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.red,
+              height: 30.0,
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            //Container 组件使用
+            child: Container(
+              child: Text("Container"),
+              height: 50.0,
+              decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.all(
+                     Radius.circular(10)
+                  ),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 4.0,
+                  )),
+              padding: EdgeInsets.all(5),
+              transform: Matrix4.translationValues(20,0,0),
+              alignment: Alignment.center,
+            ),
+          )
+        ],
+      ),
+
+      //流式布局
+      Wrap(
+        alignment: WrapAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            width: 100.0,
+            height: 50.0,
+            child: RaisedButton(
+              color: Colors.green,
+            ),
+          ),
+          SizedBox(
+            width: 100.0,
+            height: 50.0,
+            child: RaisedButton(
+              color: Colors.red,
+            ),
+          ),
+          SizedBox(
+            width: 100.0,
+            height: 50.0,
+            child: RaisedButton(
+              color: Colors.yellow,
+            ),
+          ),
+          SizedBox(
+            width: 100.0,
+            height: 50.0,
+            child: RaisedButton(
+              color: Colors.grey,
+            ),
+          )
+        ],
+      ),
+
+      //层叠布局
+      Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Text("hello world"),
+          Positioned(
+            top: 60.0,
+            child: Text("Positioned 111"),
+          ),
+          Positioned(
+            left: 10.0,
+            child: Text("Posotioned 222"),
+          )
+        ],
+      ),
+      //Padding 可以添加留白
+      Padding(
+        padding: EdgeInsets.all(16.0),
+        child: FlatButton(
+          color: Colors.red,
+          child: Text("button"),
+        ),
       )
-
-
     ]);
+  }
+}
+
+class MyListView1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // return ListView.builder(
+    //   itemCount: 100,
+    //   itemExtent: 50.0, //item 高度
+    //   itemBuilder: (BuildContext context,int index){
+    //      return ListTile(title: Text("title$index"));
+    //   },
+    // );
+
+    Widget divider1 = Divider(color: Colors.blue);
+    Widget divider2 = Divider(color: Colors.green);
+
+    return ListView.separated(
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            title: Text(
+              "$index",
+              textDirection: TextDirection.ltr,
+            ),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return index % 2 == 0 ? divider1 : divider2;
+        },
+        itemCount: 100);
   }
 }
 
 /**
  * 自定义单选框以及复选框
  */
-class SwitchAndCheckboxWidget extends StatefulWidget{
+class SwitchAndCheckboxWidget extends StatefulWidget {
   @override
   _SwitchAndCheckboxWidget createState() {
     return new _SwitchAndCheckboxWidget();
   }
 }
 
-class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget>{
+class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
   var switchStatus = true;
+
   @override
   Widget build(BuildContext context) {
     return Column(
-       children: [
-           Switch(
-             value: switchStatus,
-             onChanged: (value){
-                setState(() {
-                    switchStatus = value;
-                });
-             },
-           ),
-           Checkbox(
-             value: switchStatus,
-             activeColor: Colors.red,
-             onChanged: (value){
-               setState(() {
-                   switchStatus = value;
-               });
-             }
-           ),
-           TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                 labelText: "用户名",
-                 prefixIcon: Icon(Icons.person)
-              ),
-              onChanged: (value){
-                 print("输入框内容$value");
-              },
-           )
-       ],
+      children: [
+        Switch(
+          value: switchStatus,
+          onChanged: (value) {
+            setState(() {
+              switchStatus = value;
+            });
+          },
+        ),
+        Checkbox(
+            value: switchStatus,
+            activeColor: Colors.red,
+            onChanged: (value) {
+              setState(() {
+                switchStatus = value;
+              });
+            }),
+        TextField(
+          autofocus: true,
+          decoration:
+              InputDecoration(labelText: "用户名", prefixIcon: Icon(Icons.person)),
+          onChanged: (value) {
+            print("输入框内容$value");
+          },
+        )
+      ],
     );
   }
 }
-
-
 
 /**
  * 自定义组件, 添加导航栏
