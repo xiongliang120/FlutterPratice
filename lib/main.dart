@@ -13,8 +13,6 @@ void method1() {
   //     )
   // ));
 
-  // runApp(Custome1());
-
   runApp(Custome2(text: "111"));
 }
 
@@ -37,7 +35,7 @@ class Custome1 extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 23.0, height: 1.6),
         ),
         shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         color: Colors.red,
         highlightColor: Colors.blue[700],
         colorBrightness: Brightness.dark,
@@ -52,7 +50,9 @@ class Custome1 extends StatelessWidget {
       Image(
         width: 100.0,
         height: 100.0,
-        image: AssetImage("imgs/avatar.png",),
+        image: AssetImage(
+          "imgs/avatar.png",
+        ),
         fit: BoxFit.fill,
       ),
 
@@ -93,9 +93,7 @@ class Custome1 extends StatelessWidget {
               height: 50.0,
               decoration: BoxDecoration(
                   color: Colors.green,
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(10)
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   border: Border.all(
                     color: Colors.grey,
                     width: 4.0,
@@ -215,10 +213,10 @@ class MyGridView1 extends StatelessWidget {
     return GridView.builder(
       padding: EdgeInsets.all(10),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, //每行三列
-          crossAxisSpacing: 20, //item 左右距离
-          mainAxisSpacing: 20, //item 上下距离
-          childAspectRatio: 1.0,//显示区域宽高相等
+        crossAxisCount: 3, //每行三列
+        crossAxisSpacing: 20, //item 左右距离
+        mainAxisSpacing: 20, //item 上下距离
+        childAspectRatio: 1.0, //显示区域宽高相等
       ),
       itemBuilder: (context, index) {
         return Container(
@@ -232,9 +230,40 @@ class MyGridView1 extends StatelessWidget {
       itemCount: 30,
     );
   }
-
 }
 
+/**
+ * 自定义相对布局
+ */
+class MyStatck1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 500,
+      height: 400,
+      color: Colors.red,
+      child: Stack(
+          children: <Widget>[
+             Positioned(
+                left: 10,
+                child: Icon(Icons.person),
+             ),
+
+             Positioned(bottom: 10,
+               child: Icon(Icons.add),
+             ),
+
+             Positioned(
+               top: 50,
+               left: 50,
+               child: Icon(Icons.ac_unit),
+             )
+
+          ],
+      ),
+    );
+  }
+}
 
 /**
  * 自定义单选框以及复选框
@@ -272,7 +301,7 @@ class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
         TextField(
           autofocus: true,
           decoration:
-          InputDecoration(labelText: "用户名", prefixIcon: Icon(Icons.person)),
+              InputDecoration(labelText: "用户名", prefixIcon: Icon(Icons.person)),
           onChanged: (value) {
             print("输入框内容$value");
           },
@@ -298,8 +327,7 @@ class Custome2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(title: Text("$text")), body: MyGridView1()),
+        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyStatck1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
@@ -393,10 +421,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline4,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
