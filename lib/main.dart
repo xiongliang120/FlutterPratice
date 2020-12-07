@@ -37,14 +37,13 @@ class Custome1 extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 23.0, height: 1.6),
         ),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         color: Colors.red,
         highlightColor: Colors.blue[700],
         colorBrightness: Brightness.dark,
         splashColor: Colors.grey,
         onPressed: () {
           //导航到新路由
-          // Navigator.push(context, MaterialPageRoute(builder: (context)));
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return MyApp();
           }));
@@ -95,14 +94,14 @@ class Custome1 extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.all(
-                     Radius.circular(10)
+                      Radius.circular(10)
                   ),
                   border: Border.all(
                     color: Colors.grey,
                     width: 4.0,
                   )),
               padding: EdgeInsets.all(5),
-              transform: Matrix4.translationValues(20,0,0),
+              transform: Matrix4.translationValues(20, 0, 0),
               alignment: Alignment.center,
             ),
           )
@@ -171,6 +170,9 @@ class Custome1 extends StatelessWidget {
   }
 }
 
+/**
+ * 自定义ListView
+ */
 class MyListView1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -185,23 +187,54 @@ class MyListView1 extends StatelessWidget {
     Widget divider2 = Divider(color: Colors.green);
 
     return ListView.separated(
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: Icon(Icons.person),
-            title: Text(
-              "$index",
-              textDirection: TextDirection.ltr,
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return index % 2 == 0 ? divider1 : divider2;
-        },
-        itemCount: 100,
-        scrollDirection:Axis.vertical ,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          leading: Icon(Icons.person),
+          trailing: Icon(Icons.add),
+          title: Text(
+            "$index",
+            textDirection: TextDirection.ltr,
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return index % 2 == 0 ? divider1 : divider2;
+      },
+      itemCount: 100,
+      scrollDirection: Axis.vertical,
     );
   }
 }
+
+/**
+ * 自定义GridView
+ */
+class MyGridView1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.all(10),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, //每行三列
+          crossAxisSpacing: 20, //item 左右距离
+          mainAxisSpacing: 20, //item 上下距离
+          childAspectRatio: 1.0,//显示区域宽高相等
+      ),
+      itemBuilder: (context, index) {
+        return Container(
+          height: 50,
+          color: Colors.red,
+          padding: EdgeInsets.all(10),
+          alignment: Alignment.center,
+          child: Text("the item $index"),
+        );
+      },
+      itemCount: 30,
+    );
+  }
+
+}
+
 
 /**
  * 自定义单选框以及复选框
@@ -239,7 +272,7 @@ class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
         TextField(
           autofocus: true,
           decoration:
-              InputDecoration(labelText: "用户名", prefixIcon: Icon(Icons.person)),
+          InputDecoration(labelText: "用户名", prefixIcon: Icon(Icons.person)),
           onChanged: (value) {
             print("输入框内容$value");
           },
@@ -265,7 +298,8 @@ class Custome2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyListView1()),
+        home: Scaffold(
+            appBar: AppBar(title: Text("$text")), body: MyGridView1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
@@ -359,7 +393,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headline4,
             ),
           ],
         ),
