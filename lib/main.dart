@@ -243,28 +243,48 @@ class MyStatck1 extends StatelessWidget {
       height: 400,
       color: Colors.red,
       child: Stack(
-          children: <Widget>[
-             Positioned(
-                left: 10,
-                child: Icon(Icons.person),
-             ),
+        children: <Widget>[
+          Positioned(
+            left: 10,
+            child: Icon(Icons.person),
+          ),
+          Positioned(
+            bottom: 10,
+            child: Icon(Icons.add),
+          ),
+          Positioned(
+            top: 50,
+            left: 50,
+            child: Icon(Icons.ac_unit),
+          ),
+          Align(
+            alignment: Alignment(1, -0.5), //Alignment 参考坐标系是怎么样的
+            child: Icon(Icons.access_time),
+          )
+        ],
+      ),
+    );
+  }
+}
 
-             Positioned(bottom: 10,
-               child: Icon(Icons.add),
-             ),
-
-             Positioned(
-               top: 50,
-               left: 50,
-               child: Icon(Icons.ac_unit),
-             ),
-
-             Align(
-                 alignment: Alignment(1,-0.5),  //Alignment 参考坐标系是怎么样的
-                 child: Icon(Icons.access_time),
-             )
-
-          ],
+/**
+ * 自定义卡片布局
+ */
+class MyCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shadowColor: Colors.blue,
+      color: Colors.red,
+      child: Container(
+        height: 50,
+        alignment: Alignment.center,
+        child: Text("第一个卡片布局",
+           style: TextStyle(
+             fontSize: 20,
+             color: Colors.green
+           ),
+        ),
       ),
     );
   }
@@ -332,7 +352,7 @@ class Custome2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyStatck1()),
+        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyCard()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
