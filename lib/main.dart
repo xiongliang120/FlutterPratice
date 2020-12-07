@@ -257,6 +257,11 @@ class MyStatck1 extends StatelessWidget {
                top: 50,
                left: 50,
                child: Icon(Icons.ac_unit),
+             ),
+
+             Align(
+                 alignment: Alignment(1,-0.5),  //Alignment 参考坐标系是怎么样的
+                 child: Icon(Icons.access_time),
              )
 
           ],
