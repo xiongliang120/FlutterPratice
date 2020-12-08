@@ -211,16 +211,16 @@ class MyGridView1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10), //GridView 上下左右的padding 距离.
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3, //每行三列
         crossAxisSpacing: 20, //item 左右距离
         mainAxisSpacing: 20, //item 上下距离
-        childAspectRatio: 1.0, //显示区域宽高相等
+        childAspectRatio: 2.0, //显示区域宽高相等,item宽高的比例
       ),
       itemBuilder: (context, index) {
         return Container(
-          height: 50,
+          height: 200,
           color: Colors.red,
           padding: EdgeInsets.all(10),
           alignment: Alignment.center,
@@ -243,9 +243,10 @@ class MyStatck1 extends StatelessWidget {
       height: 400,
       color: Colors.red,
       child: Stack(
+        alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            left: 10,
+            left: 10,  //相对位置跟 alignment的值有关.
             child: Icon(Icons.person),
           ),
           Positioned(
@@ -258,7 +259,7 @@ class MyStatck1 extends StatelessWidget {
             child: Icon(Icons.ac_unit),
           ),
           Align(
-            alignment: Alignment(1, -0.5), //Alignment 参考坐标系是怎么样的
+            alignment: Alignment(-1, -0.5), //以矩形中心点即(0.0)为坐标原点,x,y 的值从-1到1分别代表矩形左边到右边的距离和顶部到底边的距离.
             child: Icon(Icons.access_time),
           )
         ],
@@ -352,7 +353,7 @@ class Custome2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyCard()),
+        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyStatck1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
