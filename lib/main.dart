@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Tab.dart';
 
 void main() {
   // runApp(MyApp());
@@ -371,6 +372,8 @@ class _MyStateFulWidget extends State<MyStateFulWidget>{
   }
 }
 
+
+
 /**
  * 自定义单选框以及复选框
  */
@@ -420,6 +423,62 @@ class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
 }
 
 /**
+ * 自定义BottomBar 组件
+ */
+class MyBottomBar1 extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    return _MyBottomBar();
+  }
+}
+
+class _MyBottomBar extends State<MyBottomBar1>{
+  var selectTab = 0;
+  List list1 = [
+    MyHomeTab(), MyCateTab(),MySetTab(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+       return
+         MaterialApp(
+             home: Scaffold(
+                 appBar: AppBar(
+                   title: Text("title"),
+                 ),
+                 bottomNavigationBar:  BottomNavigationBar(  //自定义底部导航
+                   onTap: changeTab,  //点击事件
+                   currentIndex: selectTab, //当前选中
+                   fixedColor: Colors.blue, //tab 选中颜色
+                   items: <BottomNavigationBarItem> [
+                     BottomNavigationBarItem(
+                         icon:Icon(Icons.person),
+                         title: Text("bottom1")
+                     ),
+                     BottomNavigationBarItem(
+                         icon:Icon(Icons.access_time),
+                         title: Text("bottom2")
+                     ),
+                     BottomNavigationBarItem(
+                         icon:Icon(Icons.add),
+                         title: Text("bottom3")
+                     ),
+                   ],
+                 ),
+                 body: list1[selectTab]
+             ),
+             theme: ThemeData(primaryColor: Colors.blue));
+  }
+
+  void changeTab(int position){
+    setState(() {
+      selectTab = position;
+    });
+  }
+
+}
+
+
+/**
  * 自定义组件, 添加导航栏
  */
 class Custome2 extends StatelessWidget {
@@ -431,11 +490,18 @@ class Custome2 extends StatelessWidget {
 
   String text;
   Color backgroundColor;
+  var selectTab = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyStateFulWidget()),
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text("$text"),
+        ),
+            bottomNavigationBar: MyBottomBar1() ,
+            body: MyStateFulWidget()
+        ),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
