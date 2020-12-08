@@ -292,6 +292,52 @@ class MyCard extends StatelessWidget {
 }
 
 /**
+ * 自定义Wrap
+ */
+class MyWrap1 extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+      return Wrap(
+         direction: Axis.horizontal,
+         alignment: WrapAlignment.spaceBetween,
+         runAlignment: WrapAlignment.end,  //设置纵轴对齐方式
+         spacing:10,
+         runSpacing: 10,
+         children: <Widget>[
+            RaisedButton(
+               color: Colors.blue,
+               child: Text("第一个button"),
+            ),
+           RaisedButton(
+             color: Colors.blue,
+             child: Text("第一个button"),
+           ),
+           RaisedButton(
+             color: Colors.blue,
+             child: Text("第一个button"),
+           ),
+           RaisedButton(
+             color: Colors.blue,
+             child: Text("第一个button"),
+           ),
+           RaisedButton(
+             color: Colors.blue,
+             child: Text("第一个button"),
+           ),
+           RaisedButton(
+             color: Colors.blue,
+             child: Text("第一个button"),
+           ),
+           RaisedButton(
+             color: Colors.blue,
+             child: Text("第一个button"),
+           ),
+         ],
+      );
+  }
+}
+
+/**
  * 自定义单选框以及复选框
  */
 class SwitchAndCheckboxWidget extends StatefulWidget {
@@ -324,6 +370,8 @@ class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
                 switchStatus = value;
               });
             }),
+
+        //文本输入框
         TextField(
           autofocus: true,
           decoration:
@@ -353,7 +401,7 @@ class Custome2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyStatck1()),
+        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyWrap1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
