@@ -338,6 +338,40 @@ class MyWrap1 extends StatelessWidget{
 }
 
 /**
+ * 自定义有状态组件
+ */
+class MyStateFulWidget extends StatefulWidget{
+  var count;
+  @override
+  State<StatefulWidget> createState() {
+     return _MyStateFulWidget();
+  }
+}
+
+class _MyStateFulWidget extends State<MyStateFulWidget>{
+  var count=0;
+  @override
+  Widget build(BuildContext context) {
+     return Column(
+       children: <Widget>[
+         SizedBox(
+             height: 200
+         ),
+         Text("${count}"),
+         RaisedButton(
+           child: Text("button"),
+           onPressed: (){
+               setState(() {
+                 count++;
+               });
+           },
+         )
+       ],
+     );
+  }
+}
+
+/**
  * 自定义单选框以及复选框
  */
 class SwitchAndCheckboxWidget extends StatefulWidget {
@@ -401,7 +435,7 @@ class Custome2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyWrap1()),
+        home: Scaffold(appBar: AppBar(title: Text("$text")), body: MyStateFulWidget()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
