@@ -460,7 +460,11 @@ class _MyBottomBar extends State<MyBottomBar1> {
                     icon: Icon(Icons.add), title: Text("bottom3")),
               ],
             ),
-            body: list1[selectTab]),
+            body: list1[selectTab]
+        ),
+        routes: {  //路由命名
+            "search_page": (context)=> Search("11"),
+        },
         theme: ThemeData(primaryColor: Colors.blue));
   }
 

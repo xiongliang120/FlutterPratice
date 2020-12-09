@@ -12,14 +12,21 @@ class MyHomeTab extends StatelessWidget{
             color: Colors.blue,
             child: Text("button"),
             onPressed: (){ //跳转别的页面,并且传递参数
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                   return Search("跳转传参");
-                }));
+                // Navigator.push(context, MaterialPageRoute(builder: (context){
+                //    return Search("跳转传参");
+                // }));
+
+                Navigator.pushNamed(context, "search_page");
             },
           )
         ],
     );
   }
+}
+
+
+void routeMethod1(){
+
 }
 
 class MyCateTab extends StatelessWidget{
