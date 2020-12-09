@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
   var title;
-
-  Search(String title) {
+  Map arguments;
+  Search({String title, Map arguments}) {
+    print("1111");
     this.title = title;
+    this.arguments = arguments;
   }
 
   @override
@@ -16,7 +18,7 @@ class Search extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Text("${title}"),
+          Text("${arguments["title"]}"),
           SizedBox(height: 50),
           RaisedButton(
             child: Text("返回"),

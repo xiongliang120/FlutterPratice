@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Tab.dart';
 import 'Search.dart';
+import 'routes.dart';
 
 void main() {
   // runApp(MyApp());
@@ -45,7 +46,7 @@ class Custome1 extends StatelessWidget {
         onPressed: () {
           //导航到新路由
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Search("111");
+            return Search();
           }));
         },
       ),
@@ -466,9 +467,10 @@ class _MyBottomBar extends State<MyBottomBar1> {
             ),
             body: list1[selectTab]
         ),
-        routes: {  //路由命名
-            "search_page": (context)=> Search("11"),
-        },
+        // routes: {  //路由命名 -- 无参
+        //     "search_page": (context)=> Search("11"),
+        // },
+        onGenerateRoute: generateRoute,
         theme: ThemeData(primaryColor: Colors.blue));
   }
 
