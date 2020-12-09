@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Tab.dart';
+import 'Search.dart';
 
 void main() {
   // runApp(MyApp());
@@ -44,7 +45,7 @@ class Custome1 extends StatelessWidget {
         onPressed: () {
           //导航到新路由
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return MyApp();
+            return Search("111");
           }));
         },
       ),
@@ -247,7 +248,7 @@ class MyStatck1 extends StatelessWidget {
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            left: 10,  //相对位置跟 alignment的值有关.
+            left: 10, //相对位置跟 alignment的值有关.
             child: Icon(Icons.person),
           ),
           Positioned(
@@ -260,7 +261,8 @@ class MyStatck1 extends StatelessWidget {
             child: Icon(Icons.ac_unit),
           ),
           Align(
-            alignment: Alignment(-1, -0.5), //以矩形中心点即(0.0)为坐标原点,x,y 的值从-1到1分别代表矩形左边到右边的距离和顶部到底边的距离.
+            alignment: Alignment(-1, -0.5),
+            //以矩形中心点即(0.0)为坐标原点,x,y 的值从-1到1分别代表矩形左边到右边的距离和顶部到底边的距离.
             child: Icon(Icons.access_time),
           )
         ],
@@ -281,11 +283,9 @@ class MyCard extends StatelessWidget {
       child: Container(
         height: 50,
         alignment: Alignment.center,
-        child: Text("第一个卡片布局",
-           style: TextStyle(
-             fontSize: 20,
-             color: Colors.green
-           ),
+        child: Text(
+          "第一个卡片布局",
+          style: TextStyle(fontSize: 20, color: Colors.green),
         ),
       ),
     );
@@ -295,84 +295,83 @@ class MyCard extends StatelessWidget {
 /**
  * 自定义Wrap
  */
-class MyWrap1 extends StatelessWidget{
+class MyWrap1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-      return Wrap(
-         direction: Axis.horizontal,
-         alignment: WrapAlignment.spaceBetween,
-         runAlignment: WrapAlignment.end,  //设置纵轴对齐方式
-         spacing:10,
-         runSpacing: 10,
-         children: <Widget>[
-            RaisedButton(
-               color: Colors.blue,
-               child: Text("第一个button"),
-            ),
-           RaisedButton(
-             color: Colors.blue,
-             child: Text("第一个button"),
-           ),
-           RaisedButton(
-             color: Colors.blue,
-             child: Text("第一个button"),
-           ),
-           RaisedButton(
-             color: Colors.blue,
-             child: Text("第一个button"),
-           ),
-           RaisedButton(
-             color: Colors.blue,
-             child: Text("第一个button"),
-           ),
-           RaisedButton(
-             color: Colors.blue,
-             child: Text("第一个button"),
-           ),
-           RaisedButton(
-             color: Colors.blue,
-             child: Text("第一个button"),
-           ),
-         ],
-      );
+    return Wrap(
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.spaceBetween,
+      runAlignment: WrapAlignment.end,
+      //设置纵轴对齐方式
+      spacing: 10,
+      runSpacing: 10,
+      children: <Widget>[
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("第一个button"),
+        ),
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("第一个button"),
+        ),
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("第一个button"),
+        ),
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("第一个button"),
+        ),
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("第一个button"),
+        ),
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("第一个button"),
+        ),
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("第一个button"),
+        ),
+      ],
+    );
   }
 }
 
 /**
  * 自定义有状态组件
  */
-class MyStateFulWidget extends StatefulWidget{
+class MyStateFulWidget extends StatefulWidget {
   var count;
+
   @override
   State<StatefulWidget> createState() {
-     return _MyStateFulWidget();
+    return _MyStateFulWidget();
   }
 }
 
-class _MyStateFulWidget extends State<MyStateFulWidget>{
-  var count=0;
+class _MyStateFulWidget extends State<MyStateFulWidget> {
+  var count = 0;
+
   @override
   Widget build(BuildContext context) {
-     return Column(
-       children: <Widget>[
-         SizedBox(
-             height: 200
-         ),
-         Text("${count}"),
-         RaisedButton(
-           child: Text("button"),
-           onPressed: (){
-               setState(() {
-                 count++;
-               });
-           },
-         )
-       ],
-     );
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 200),
+        Text("${count}"),
+        RaisedButton(
+          child: Text("button"),
+          onPressed: () {
+            setState(() {
+              count++;
+            });
+          },
+        )
+      ],
+    );
   }
 }
-
-
 
 /**
  * 自定义单选框以及复选框
@@ -425,61 +424,55 @@ class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
 /**
  * 自定义BottomBar 组件
  */
-class MyBottomBar1 extends StatefulWidget{
+class MyBottomBar1 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _MyBottomBar();
   }
 }
 
-class _MyBottomBar extends State<MyBottomBar1>{
+class _MyBottomBar extends State<MyBottomBar1> {
   var selectTab = 0;
   List list1 = [
-    MyHomeTab(), MyCateTab(),MySetTab(),
+    MyHomeTab(),
+    MyCateTab(),
+    MySetTab(),
   ];
+
   @override
   Widget build(BuildContext context) {
-       return
-         MaterialApp(
-             home: Scaffold(
-                 appBar: AppBar(
-                   title: Text("title"),
-                 ),
-                 bottomNavigationBar:  BottomNavigationBar(  //自定义底部导航
-                   onTap: changeTab,  //点击事件
-                   currentIndex: selectTab, //当前选中
-                   fixedColor: Colors.blue, //tab 选中颜色
-                   items: <BottomNavigationBarItem> [
-                     BottomNavigationBarItem(
-                         icon:Icon(Icons.person),
-                         title: Text("bottom1")
-                     ),
-                     BottomNavigationBarItem(
-                         icon:Icon(Icons.access_time),
-                         title: Text("bottom2")
-                     ),
-                     BottomNavigationBarItem(
-                         icon:Icon(Icons.add),
-                         title: Text("bottom3")
-                     ),
-                   ],
-                 ),
-                 body: list1[selectTab]
-             ),
-             theme: ThemeData(primaryColor: Colors.blue));
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text("title"),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              //自定义底部导航
+              onTap: changeTab, //点击事件
+              currentIndex: selectTab, //当前选中
+              fixedColor: Colors.blue, //tab 选中颜色
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.person), title: Text("bottom1")),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.access_time), title: Text("bottom2")),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.add), title: Text("bottom3")),
+              ],
+            ),
+            body: list1[selectTab]),
+        theme: ThemeData(primaryColor: Colors.blue));
   }
 
-  void changeTab(int position){
+  void changeTab(int position) {
     setState(() {
       selectTab = position;
     });
   }
-
 }
 
-
 /**
- * 自定义组件, 添加导航栏
+ * 自定义底部导航
  */
 class Custome2 extends StatelessWidget {
   /**
@@ -494,117 +487,32 @@ class Custome2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MyBottomBar1();
+  }
+}
+
+/**
+ * 测试各类组件
+ */
+class Custome3 extends StatelessWidget {
+  /**
+   * 自定义构造函数
+   */
+  Custome3({Key key, @required this.text, this.backgroundColor: Colors.amber})
+      : super(key: key);
+
+  String text;
+  Color backgroundColor;
+  var selectTab = 0;
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
               title: Text("$text"),
-        ),
-            bottomNavigationBar: MyBottomBar1() ,
-            body: MyStateFulWidget()
-        ),
+            ),
+            body: MyStateFulWidget()),
         theme: ThemeData(primaryColor: backgroundColor));
-  }
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
   }
 }

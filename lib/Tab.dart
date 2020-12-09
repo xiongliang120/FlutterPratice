@@ -11,7 +11,7 @@ class MyHomeTab extends StatelessWidget{
           RaisedButton(
             color: Colors.blue,
             child: Text("button"),
-            onPressed: (){
+            onPressed: (){ //跳转别的页面,并且传递参数
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                    return Search("跳转传参");
                 }));

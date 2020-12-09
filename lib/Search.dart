@@ -16,7 +16,7 @@ class Search extends StatelessWidget{
           SizedBox(height: 50),
           RaisedButton(
             child: Text("返回"),
-            onPressed: (){
+            onPressed: (){  //返回上一页
               Navigator.of(context).pop();
             },
           )
