@@ -451,7 +451,7 @@ class _MyBottomBar extends State<MyBottomBar1> {
               onTap: changeTab, //点击事件
               currentIndex: selectTab, //当前选中
               fixedColor: Colors.blue, //tab 选中颜色
-              items: <BottomNavigationBarItem>[
+              items: [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person), title: Text("bottom1")),
                 BottomNavigationBarItem(
