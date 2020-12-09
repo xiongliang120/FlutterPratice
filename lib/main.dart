@@ -165,6 +165,10 @@ class Custome1 extends StatelessWidget {
           color: Colors.red,
           child: Text("button"),
         ),
+      ),
+      CircleAvatar(
+        backgroundColor: Colors.blue,
+        child: Icon(Icons.person),
       )
     ]);
   }
@@ -516,7 +520,7 @@ class Custome3 extends StatelessWidget {
             appBar: AppBar(
               title: Text("$text"),
             ),
-            body: MyStateFulWidget()),
+            body: Custome1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
 }
