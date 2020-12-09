@@ -25,10 +25,6 @@ class MyHomeTab extends StatelessWidget{
 }
 
 
-void routeMethod1(){
-
-}
-
 class MyCateTab extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
