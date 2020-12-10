@@ -50,11 +50,17 @@ class MySetTab extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
        home: Scaffold(
-         appBar: AppBar(
-          title: Text("Setting 界面"),
-         ),
-         body: Center(
-           child: Text("Set") ,
+         body: Column(
+           children: <Widget>[
+             RaisedButton(
+               color: Colors.blue,
+               child: Text("跳转到Login界面"),
+               onPressed: (){
+                 //路由替换, 会将当前路径替换为login_page
+                 Navigator.pushReplacementNamed(context, "login_page");
+               },
+             )
+           ],
          )
        ),
     );

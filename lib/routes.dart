@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Login.dart';
+import 'package:flutter_app/main.dart';
 import 'Search.dart';
 import 'Tab.dart';
 
 var routes = {
   "search_page": (context,{arguments}) => Search(arguments:arguments), //添加可选参数
-  "set_page": (context) => MySetTab()
+  "set_page": (context) => MySetTab(),
+  "login_page":(context)=> MyLoginTab(),
+  "home_page":(context)=> MyBottomBar1()
 };
 
 /**
