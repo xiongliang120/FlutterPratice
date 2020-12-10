@@ -440,7 +440,8 @@ class _MyBottomBar extends State<MyBottomBar1> {
   var selectTab = 0;
   List list1 = [
     MyHomeTab(),
-    MyCateTab(),
+    // MyCateTab(),
+    MyCateTabControllerTab(),
     MySetTab(),
   ];
 
@@ -465,7 +466,28 @@ class _MyBottomBar extends State<MyBottomBar1> {
                     icon: Icon(Icons.add), title: Text("bottom3")),
               ],
             ),
-            body: list1[selectTab]
+            body: list1[selectTab],
+            drawer: Drawer(
+              child:Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: DrawerHeader(
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                          ),
+                          child: Text("drawer head"),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text("drawer item1"),
+                  Text("drawer item2"),
+                  Text("drawer item3"),
+                ],
+              ),
+            ),
         ),
         // routes: {  //路由命名 -- 无参
         //     "search_page": (context)=> Search("11"),

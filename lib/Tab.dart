@@ -106,6 +106,67 @@ class MyCateTab extends StatelessWidget {
   }
 }
 
+/***
+ * 通过TabController 自定义顶部导航
+ */
+class MyCateTabControllerTab extends StatefulWidget  {
+  @override
+  State<StatefulWidget> createState() {
+     return _MyCateTabControllerTab1();
+  }
+}
+
+class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab> with SingleTickerProviderStateMixin{
+  TabController tabController;
+
+  @override
+  void dispose() { //组件销毁
+    super.dispose();
+    tabController.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = new TabController(length: 3, vsync: this);
+    tabController.addListener(() {
+       print(tabController.index);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+           bottom: TabBar(
+             controller: tabController,
+             tabs: <Widget>[
+               Tab(text: "第一个"),
+               Tab(text: "第二个"),
+               Tab(text: "第三个"),
+             ],
+           ),
+        ),
+        body: TabBarView(
+          controller: tabController,
+          children: <Widget>[
+            Center(
+              child: Text("第一个")
+            ),
+            Center(
+                child: Text("第二个")
+            ),
+            Center(
+                child: Text("第三个")
+            ),
+          ],
+        ),
+      );
+  }
+
+}
+
+
 class MySetTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
