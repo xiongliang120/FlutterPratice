@@ -482,7 +482,7 @@ class _MyBottomBar extends State<MyBottomBar1> {
 }
 
 /**
- * 自定义底部导航
+ *
  */
 class Custome2 extends StatelessWidget {
   /**
