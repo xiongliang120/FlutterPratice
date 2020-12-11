@@ -44,7 +44,7 @@ class MyHomeTab extends StatelessWidget {
 }
 
 /**
- * 自定义顶部导航
+ * 自定义顶部导航 实现方式之一
  */
 class MyCateTab extends StatelessWidget {
   @override
@@ -107,7 +107,7 @@ class MyCateTab extends StatelessWidget {
 }
 
 /***
- * 通过TabController 自定义顶部导航
+ * 通过TabController 自定义顶部导航 实现方式之二
  */
 class MyCateTabControllerTab extends StatefulWidget  {
   @override
@@ -138,13 +138,19 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab> with Single
   Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-           bottom: TabBar(
-             controller: tabController,
-             tabs: <Widget>[
-               Tab(text: "第一个"),
-               Tab(text: "第二个"),
-               Tab(text: "第三个"),
-             ],
+           title: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TabBar(
+                    controller: tabController,
+                    tabs: <Widget>[
+                      Tab(text: "第一个"),
+                      Tab(text: "第二个"),
+                      Tab(text: "第三个"),
+                    ],
+                  ),
+                )
+              ],
            ),
         ),
         body: TabBarView(

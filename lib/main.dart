@@ -482,9 +482,24 @@ class _MyBottomBar extends State<MyBottomBar1> {
                       ),
                     ],
                   ),
-                  Text("drawer item1"),
-                  Text("drawer item2"),
-                  Text("drawer item3"),
+                  ListTile(
+                    title: Text("drawer item1"),
+                  ),
+                  ListTile(
+                    title: Text("drawer item2"),
+                  ),
+                  ListTile(
+                    title: Text("drawer item3"),
+                  ),
+                  RaisedButton(
+                    child:Text("跳转到搜索"),
+                    onPressed: (){
+                      // Navigator.of(context).pop(); //隐藏侧边栏
+                      // Navigator.pushNamed(context, "search_page");
+                      Navigator.pushNamed(context, "search_page",
+                          arguments: {"title": "这个Search 界面的参数"});
+                    },
+                  )
                 ],
               ),
             ),
