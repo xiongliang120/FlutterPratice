@@ -474,42 +474,7 @@ class _MyBottomBar extends State<MyBottomBar1> {
               ],
             ),
             body: list1[selectTab],
-            drawer: Drawer(
-              child:Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: DrawerHeader(
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                          ),
-                          child: Text("drawer head"),
-                        ),
-                      ),
-                    ],
-                  ),
-                  ListTile(
-                    title: Text("drawer item1"),
-                  ),
-                  ListTile(
-                    title: Text("drawer item2"),
-                  ),
-                  ListTile(
-                    title: Text("drawer item3"),
-                  ),
-                  RaisedButton(
-                    child:Text("跳转到搜索"),
-                    onPressed: (){
-                      // Navigator.of(context).pop(); //隐藏侧边栏
-                      // Navigator.pushNamed(context, "search_page");
-                      Navigator.pushNamed(context, "search_page",
-                          arguments: {"title": "这个Search 界面的参数"});
-                    },
-                  )
-                ],
-              ),
-            ),
+            drawer: MyDrawer()
         ),
         // routes: {  //路由命名 -- 无参
         //     "search_page": (context)=> Search("11"),
@@ -524,6 +489,7 @@ class _MyBottomBar extends State<MyBottomBar1> {
     });
   }
 }
+
 
 /**
  *
@@ -569,4 +535,46 @@ class Custome3 extends StatelessWidget {
             body: Custome1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
+}
+
+/**
+ *  自定义侧滑菜单, Navigator.pushNamed 必须在Stateless 中跳转才行
+ */
+class MyDrawer extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+      return Drawer(
+        child:Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: Text("drawer head"),
+                  ),
+                ),
+              ],
+            ),
+            ListTile(
+              title: Text("drawer item1"),
+            ),
+            ListTile(
+              title: Text("drawer item2"),
+            ),
+            ListTile(
+              title: Text("drawer item3"),
+              onTap: (){
+                Navigator.of(context).pop(); //隐藏侧边栏
+                Navigator.pushNamed(context, "search_page",
+                    arguments: {"title": "这个Search 界面的参数"});
+              },
+            ),
+          ],
+        ),
+      );
+  }
+
 }
