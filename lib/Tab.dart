@@ -44,7 +44,7 @@ class MyHomeTab extends StatelessWidget {
 }
 
 /**
- * 自定义顶部导航 实现方式之一
+ * 自定义顶部导航 实现方式之一, 采用 DefaultTabController 实现
  */
 class MyCateTab extends StatelessWidget {
   @override
@@ -53,20 +53,20 @@ class MyCateTab extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-            title: Row(
+            title: Row(  //自定义AppBar 放在title 而非 bottom 减少顶部的空白
               children: <Widget>[
                 Expanded(
                   child: TabBar(
                     tabs: <Widget>[
                        Tab(
                         text: "第一个",
-                      ),
+                       ),
                        Tab(
                         text: "第二个",
-                      ),
+                       ),
                        Tab(
                         text: "第三个",
-                      ),
+                       ),
                     ],
                   ),
                 ),
@@ -108,6 +108,7 @@ class MyCateTab extends StatelessWidget {
 
 /***
  * 通过TabController 自定义顶部导航 实现方式之二
+ * 采用 TabController实现
  */
 class MyCateTabControllerTab extends StatefulWidget  {
   @override
