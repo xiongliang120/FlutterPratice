@@ -3,6 +3,13 @@ import 'package:flutter_app/Tab.dart';
 import 'Search.dart';
 import 'routes.dart';
 
+
+/**
+ * flutter 命令：
+ * flutter create 项目名  -- 创建flutter 工程
+ * flutter create -t module  模块名 -- 创建flutter module
+ *
+ */
 void main() {
   // runApp(MyApp());
   method1();
