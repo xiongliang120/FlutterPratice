@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/Tab.dart';
 import 'Search.dart';
 import 'routes.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:date_format/date_format.dart';
 
 
 /**
@@ -24,6 +26,7 @@ void method1() {
   // ));
 
   runApp(Custome2(text: "111"));
+  // runApp(Custome3());
 }
 
 /**
@@ -56,6 +59,12 @@ class Custome1 extends StatelessWidget {
             return Search();
           }));
         },
+      ),
+      RaisedButton(
+        child: Text("RaisedButton"),
+        color: Colors.blue,
+        elevation: 50,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       Image(
         width: 100.0,
@@ -397,6 +406,14 @@ class SwitchAndCheckboxWidget extends StatefulWidget {
 
 class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
   var switchStatus = true;
+  var userName = TextEditingController();
+  var sex;
+
+  @override
+  void initState() {
+    super.initState();
+    print(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -418,14 +435,42 @@ class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
                 switchStatus = value;
               });
             }),
-
+        Radio(
+          //单选按钮
+          value: 1,
+          onChanged: (value) {
+            setState(() {
+              this.sex = value;
+            });
+          },
+          groupValue: this.sex,
+        ),
+        Radio(
+          value: 2,
+          onChanged: (value) {
+            setState(() {
+              this.sex = value;
+            });
+          },
+          groupValue: this.sex,
+        ),
         //文本输入框
         TextField(
           autofocus: true,
           decoration:
               InputDecoration(labelText: "用户名", prefixIcon: Icon(Icons.person)),
           onChanged: (value) {
-            print("输入框内容$value");
+            setState(() {
+              userName.text = value;
+            });
+          },
+          controller: userName,
+        ),
+
+        RaisedButton(
+          child: Text("获取TextFiled的值"),
+          onPressed: () {
+            print("${userName.text}");
           },
         )
       ],
@@ -455,32 +500,54 @@ class _MyBottomBar extends State<MyBottomBar1> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text("title"),
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              //自定义底部导航
-              onTap: changeTab, //点击事件
-              currentIndex: selectTab, //当前选中
-              fixedColor: Colors.blue, //tab 选中颜色
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person), title: Text("bottom1")),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.access_time), title: Text("bottom2")),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.add), title: Text("bottom3")),
-              ],
-            ),
-            body: list1[selectTab],
-            drawer: MyDrawer()
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("title"),
         ),
-        // routes: {  //路由命名 -- 无参
-        //     "search_page": (context)=> Search("11"),
-        // },
-        onGenerateRoute: generateRoute,
-        theme: ThemeData(primaryColor: Colors.blue));
+        bottomNavigationBar: BottomNavigationBar(
+          //自定义底部导航
+          onTap: changeTab, //点击事件
+          currentIndex: selectTab, //当前选中
+          fixedColor: Colors.blue, //tab 选中颜色
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person), title: Text("bottom1")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.access_time), title: Text("bottom2")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.add), title: Text("bottom3")),
+          ],
+        ),
+        body: list1[selectTab],
+        drawer: MyDrawer(),
+        floatingActionButton: Container(
+            margin: EdgeInsets.only(top: 10),
+            height: 50,
+            width: 50,
+            child: FloatingActionButton(
+              child: Icon(
+                Icons.add,
+                size: 30,
+              ),
+              backgroundColor: Colors.yellow,
+            )),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+      // routes: {  //路由命名 -- 无参
+      //     "search_page": (context)=> Search("11"),
+      // },
+      onGenerateRoute: generateRoute,
+      theme: ThemeData(primaryColor: Colors.blue),
+      localizationsDelegates: [
+        // 本地化的代理类
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('zh', 'CN'),
+      ],
+    );
   }
 
   void changeTab(int position) {
@@ -489,7 +556,6 @@ class _MyBottomBar extends State<MyBottomBar1> {
     });
   }
 }
-
 
 /**
  *
@@ -532,6 +598,15 @@ class Custome3 extends StatelessWidget {
             appBar: AppBar(
               title: Text("$text"),
             ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(
+                Icons.add,
+                size: 30,
+              ),
+              backgroundColor: Colors.yellow,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
             body: Custome1()),
         theme: ThemeData(primaryColor: backgroundColor));
   }
@@ -540,41 +615,40 @@ class Custome3 extends StatelessWidget {
 /**
  *  自定义侧滑菜单, Navigator.pushNamed 必须在Stateless 中跳转才行
  */
-class MyDrawer extends StatelessWidget{
+class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-      return Drawer(
-        child:Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                    ),
-                    child: Text("drawer head"),
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
                   ),
+                  child: Text("drawer head"),
                 ),
-              ],
-            ),
-            ListTile(
-              title: Text("drawer item1"),
-            ),
-            ListTile(
-              title: Text("drawer item2"),
-            ),
-            ListTile(
-              title: Text("drawer item3"),
-              onTap: (){
-                Navigator.of(context).pop(); //隐藏侧边栏
-                Navigator.pushNamed(context, "search_page",
-                    arguments: {"title": "这个Search 界面的参数"});
-              },
-            ),
-          ],
-        ),
-      );
+              ),
+            ],
+          ),
+          ListTile(
+            title: Text("drawer item1"),
+          ),
+          ListTile(
+            title: Text("drawer item2"),
+          ),
+          ListTile(
+            title: Text("drawer item3"),
+            onTap: () {
+              Navigator.of(context).pop(); //隐藏侧边栏
+              Navigator.pushNamed(context, "search_page",
+                  arguments: {"title": "这个Search 界面的参数"});
+            },
+          ),
+        ],
+      ),
+    );
   }
-
 }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'Search.dart';
 
@@ -37,10 +38,26 @@ class MyHomeTab extends StatelessWidget {
 
             Navigator.pushNamed(context, "set_page");
           },
+        ),
+        SizedBox(
+          height:40,
+        ),
+        RaisedButton(
+          child: Text("打开日期选择"),
+          onPressed: (){
+            _showDatePicker(context);
+          },
         )
       ],
     );
   }
+}
+
+void _showDatePicker(BuildContext context) async{
+   var result = await showDatePicker(context:context,
+       initialDate: DateTime.now(), firstDate: DateTime(1970), lastDate: DateTime(2100));
+
+   print(result);
 }
 
 /**
