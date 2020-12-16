@@ -3,7 +3,7 @@ import 'package:flutter_app/Tab.dart';
 import 'Search.dart';
 import 'routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:date_format/date_format.dart';
+import 'package:date_format/date_format.dart' as DateFormat;
 
 
 /**
@@ -412,7 +412,8 @@ class _SwitchAndCheckboxWidget extends State<SwitchAndCheckboxWidget> {
   @override
   void initState() {
     super.initState();
-    print(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
+    var result = DateFormat.formatDate(DateTime.now(), [DateFormat.yyyy, '-', DateFormat.mm, '-', DateFormat.dd]);
+    print(result);
   }
 
   @override
@@ -539,13 +540,12 @@ class _MyBottomBar extends State<MyBottomBar1> {
       onGenerateRoute: generateRoute,
       theme: ThemeData(primaryColor: Colors.blue),
       localizationsDelegates: [
-        // 本地化的代理类
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate, // 指定本地化的字符串和一些其他的值
+        GlobalCupertinoLocalizations.delegate, // 对应的Cupertino风格
+        GlobalWidgetsLocalizations.delegate // 指定默认的文本排列方向, 由左到右或由右到左
       ],
       supportedLocales: [
-        Locale('en', 'US'),
-        Locale('zh', 'CN'),
+        Locale("zh","CH")
       ],
     );
   }

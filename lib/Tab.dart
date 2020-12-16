@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'Search.dart';
+import 'package:date_format/date_format.dart' as DateFormat;
 
 class MyHomeTab extends StatelessWidget {
   @override
@@ -55,9 +56,12 @@ class MyHomeTab extends StatelessWidget {
 
 void _showDatePicker(BuildContext context) async{
    var result = await showDatePicker(context:context,
-       initialDate: DateTime.now(), firstDate: DateTime(1970), lastDate: DateTime(2100));
+       initialDate: DateTime.now(),
+       locale: Locale("zh"),
+       firstDate: DateTime(1970),
+       lastDate: DateTime(2100));
 
-   print(result);
+   print(DateFormat.formatDate(result, [DateFormat.yyyy, '-', DateFormat.MM, '-', DateFormat.DD]));
 }
 
 /**
