@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'entity.dart';
+
+
 
 
 class NetworkWidget extends StatefulWidget{
@@ -82,11 +85,24 @@ class JsonWidget extends StatelessWidget{
         child: Text("json 解析"),
         onPressed: (){
            //一个JSON格式的用户列表字符串
-           String jsonStr='[{"name":"Jack"},{"name":"Rose"}]';
+           String jsonStr = '''{
+            "firstName" : "xiong",
+            "lastName" : "liang"
+           }''';
+          // String jsonStr='[{"name":"Jack"},{"name":"Rose"}]';
            //将JSON字符串转为Dart对象(此处是List)
-           List items=json.decode(jsonStr);
+           // List items=json.decode(jsonStr);
            //输出第一个用户的姓名
-           print(items[0]["name"]);
+           // print(items[0]["name"]);
+
+           Person data1 = Person.fromJson(json.decode(jsonStr));
+           print("打印名字="+data1.firstName);
+           var person = Person();
+           person.firstName = "xiong";
+           person.lastName = "xiongliang";
+           Map<String,dynamic> map = person.toJson();
+           print("打印json="+map.toString());
+
         },
       ),
     );
