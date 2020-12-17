@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart' as DateFormat;
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'CustomeDialog.dart';
+import 'package:toast/toast.dart';
 
 class MyHomeTab extends StatelessWidget {
   @override
@@ -63,9 +64,7 @@ class MyHomeTab extends StatelessWidget {
         //Toast
         RaisedButton(
           onPressed: () {
-            // Navigator.of(context).push(MaterialPageRoute(
-            //   builder: (context) => FlutterToast.ToastContext(),
-            // ));
+            showToast(context,"Show Long Toast", duration: Toast.LENGTH_LONG);
           },
           child: Text("Flutter Toast Context"),
         ),
@@ -157,6 +156,12 @@ void _showCustomeDialog(BuildContext context){
    });
 }
 
+/**
+ * 显示Toast
+ */
+void showToast(BuildContext context,String msg, {int duration, int gravity}) {
+  Toast.show(msg, context, duration: duration, gravity: gravity);
+}
 
 
 
