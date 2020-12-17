@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart' as DateFormat;
+import 'package:flutter_app/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'CustomeDialog.dart';
 import 'package:toast/toast.dart';
@@ -68,6 +69,12 @@ class MyHomeTab extends StatelessWidget {
           },
           child: Text("Flutter Toast Context"),
         ),
+        SizedBox(height: 30),
+        NetworkWidget(),
+        SizedBox(height: 30,),
+        DioNetworkWidget(),
+        SizedBox(height: 30,),
+        JsonWidget()
       ],
     );
   }
