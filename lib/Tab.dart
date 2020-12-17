@@ -103,7 +103,6 @@ void _showAlertDialog(BuildContext context) {
             FlatButton(
               child: Text("删除"),
               onPressed: () {
-                // ... 执行删除操作
                 Navigator.of(context).pop(true); //关闭对话框
               },
             ),
