@@ -17,7 +17,8 @@ class Person {
   String firstName;
   String lastName;
   DateTime dateOfBirth;
-  Person({this.firstName, this.lastName, this.dateOfBirth});
+  Children child;
+  Person({this.firstName, this.lastName, this.dateOfBirth,this.child});
 
   //反序列化
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
@@ -26,3 +27,19 @@ class Person {
   Map<String, dynamic> toJson() => _$PersonToJson(this);
 }
 
+@JsonSerializable()
+class Children{
+  int age;
+  String school;
+
+  Children(int age,String school){
+     this.age = age;
+     this.school = school;
+  }
+
+  //反序列化
+  factory Children.fromJson(Map<String, dynamic> json) => _$ChildrenFromJson(json);
+
+  //序列化
+  Map<String, dynamic> toJson() => _$ChildrenToJson(this);
+}

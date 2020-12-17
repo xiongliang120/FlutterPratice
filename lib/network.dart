@@ -87,19 +87,19 @@ class JsonWidget extends StatelessWidget{
            //一个JSON格式的用户列表字符串
            String jsonStr = '''{
             "firstName" : "xiong",
-            "lastName" : "liang"
+            "lastName" : "liang",
+            "dateOfBirth": "${DateTime(2020)}",
+            "child":${json.encode(Children(12, "小学"))}
            }''';
-          // String jsonStr='[{"name":"Jack"},{"name":"Rose"}]';
-           //将JSON字符串转为Dart对象(此处是List)
-           // List items=json.decode(jsonStr);
-           //输出第一个用户的姓名
-           // print(items[0]["name"]);
 
-           Person data1 = Person.fromJson(json.decode(jsonStr));
+           print("打印"+jsonStr);
+           Person data1 = Person.fromJson(json.decode(jsonStr) as Map<String,dynamic>);
            print("打印名字="+data1.firstName);
            var person = Person();
            person.firstName = "xiong";
            person.lastName = "xiongliang";
+           person.dateOfBirth = DateTime(2019,8,23);
+           person.child = Children(12, "xiaox");
            Map<String,dynamic> map = person.toJson();
            print("打印json="+map.toString());
 
