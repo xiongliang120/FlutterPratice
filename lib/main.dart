@@ -29,8 +29,8 @@ void method1() {
 
   runApp(Custome2(text: "111"));
   // runApp(Custome3());
-  // method8();
-  method9();
+  method8();
+  // method9();
 }
 
 /**
@@ -89,6 +89,8 @@ void method8(){
    }).whenComplete(() => { //类似 finally
      print("最终都会执行")
    });
+
+   print("测试异步是否执行");
 }
 
 /**
