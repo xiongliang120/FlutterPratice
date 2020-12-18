@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Tab.dart';
 import 'Search.dart';
@@ -27,7 +29,91 @@ void method1() {
 
   runApp(Custome2(text: "111"));
   // runApp(Custome3());
+  // method8();
+  method9();
 }
+
+/**
+ *
+ * 事件队列, 包含外部事件,例如I/O, Timer,绘制事件等
+ * 微任务队列, 包含dart内部的微任务,主要通过scheduleMicrotask来调度.
+ *
+ * 以微任务方式执行异步任务
+ * 以事件任务方式执行异步任务
+ *
+ * ---------------------
+ * Future 使用, 上诉通过回调函数做异步会导致回调地狱问题, 引入Future 可以解决回调地狱问题
+ * Future 相对回调函数,缓解了回调地狱问题,但Future 串的任务比较多的话, 代码可读性变差;
+ * Dart 进一步优化 async/await.
+ * ---------------------
+ * async/await, 可以以同步代码的形式写出异步代码.
+ *
+ */
+void method8(){
+   //以微任务方式执行异步任务
+   scheduleMicrotask((){
+      print("微任务");
+   });
+
+   //以事件任务方式执行异步任务
+   Timer.run(() {
+     print("事件任务");
+   });
+
+   Future((){
+     print("立即在事件队列中执行");
+   });
+
+   Future.delayed(Duration(seconds: 1),(){
+     print("1秒后在事件队列中执行");
+   });
+
+   Future.microtask(() =>{
+      print("立即在微任务队列中执行")
+   });
+
+   Future.sync(() => { //同步执行即方法调用处执行.
+     print("同步执行的Future")
+   });
+
+   Future((){
+     print("事件队列执行第一个Future");
+     return 1;
+   }).then((value){
+     print("事件队列执行第二个Future ${value}");
+     return 2;
+   }).then((value) {
+     print("事件队列执行第三个Future ${value}");
+   }).catchError((onError){ //类似try_catch
+     print("任务序列处理失败");
+   }).whenComplete(() => { //类似 finally
+     print("最终都会执行")
+   });
+}
+
+/**
+ * async/await, 以同步代码形式写异步代码
+ */
+void method9(){
+   foo();
+   print("method9 ");
+}
+
+foo() async{
+  print("foo");
+  String value = await bar();
+  /**
+   * await 修饰函数返回Future,立马结束,并且其后的代码会被以then的方式链式放在该任务后面.
+   */
+  print("bar 返回 ${value}");
+}
+
+bar() async{
+  print("bar");
+  return "hello";
+}
+
+
 
 
 /**
