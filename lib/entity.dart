@@ -12,7 +12,7 @@ part 'entity.g.dart';
  * 参考网址:
  * https://www.jianshu.com/p/b307a377c5e8
  */
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: true)
 class Person {
   String firstName;
   String lastName;

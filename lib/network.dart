@@ -87,14 +87,13 @@ class JsonWidget extends StatelessWidget{
            //一个JSON格式的用户列表字符串
            String jsonStr = '''{
             "firstName" : "xiong",
-            "lastName" : "liang",
             "dateOfBirth": "${DateTime(2020)}",
             "child":${json.encode(Children(12, "小学"))}
            }''';
 
            print("打印"+jsonStr);
            Person data1 = Person.fromJson(json.decode(jsonStr) as Map<String,dynamic>);
-           print("打印名字="+data1.firstName);
+           print("打印名字="+data1.firstName+"lastName="+"${data1.lastName}");
            var person = Person();
            person.firstName = "xiong";
            person.lastName = "xiongliang";

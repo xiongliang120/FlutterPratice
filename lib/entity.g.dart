@@ -19,21 +19,12 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PersonToJson(Person instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('firstName', instance.firstName);
-  writeNotNull('lastName', instance.lastName);
-  writeNotNull('dateOfBirth', instance.dateOfBirth?.toIso8601String());
-  writeNotNull('child', instance.child);
-  return val;
-}
+Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
+      'child': instance.child,
+    };
 
 Children _$ChildrenFromJson(Map<String, dynamic> json) {
   return Children(
