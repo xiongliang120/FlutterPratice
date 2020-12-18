@@ -115,6 +115,14 @@ bar() async{
   return "hello";
 }
 
+/**
+ * 创建多线程, Isolate
+ * https://blog.csdn.net/weixin_34051201/article/details/87961959
+ */
+void concurrentMethod(){
+
+}
+
 
 
 
