@@ -7,6 +7,7 @@ void main(){
    method6();
 }
 
+
 /**
  * 定义字符串
  * '''''' 三引号可以显示换行
@@ -109,7 +110,8 @@ void method3(){
 }
 
 /**
- * 可选参数,[] 包着可选参数
+ * 可选参数,[] 包着可选位置参数
+ * 以及可选命名参数
  */
 void method4(String name,[int age=10]){
    print(name);
@@ -138,20 +140,27 @@ void method6(){
    print(a);
 }
 
-void method1(){
-   var person = new Person();
-   person.printName();
-   print("age= ${Person.age}");
+
+/**
+ * 级联操作
+ */
+void method7(){
+   var person = Person();
+   person ..name = "xiongliang" ..country = "aa";
+   print("打印person信息="+person.name + ".."+ person.country);
 }
 
 class Person{
    var name = "11";
+   var country = "xian";
    static var age = 29;
 
    void printName(){
       print(name);
    }
 }
+
+
 
 
 

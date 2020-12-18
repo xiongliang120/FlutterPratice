@@ -29,6 +29,7 @@ void method1() {
   // runApp(Custome3());
 }
 
+
 /**
  * 自定义组件
  * 添加多个组件,通过Column包含多个组件.
