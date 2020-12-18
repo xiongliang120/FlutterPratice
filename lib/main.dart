@@ -194,16 +194,26 @@ class Custome1 extends StatelessWidget {
 /**
  * 自定义ListView
  */
-class MyListView1 extends StatelessWidget {
+class MyListView1 extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+     return _MyListView1();
+  }
+}
+
+class _MyListView1 extends State<MyListView1> {
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+         print("打印滚动位置"+"${_scrollController.offset}");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // return ListView.builder(
-    //   itemCount: 100,
-    //   itemBuilder: (context,index){
-    //      return ListTile(title: Text("title$index"));
-    //   },
-    // );
-
     Widget divider1 = Divider(color: Colors.blue);
     Widget divider2 = Divider(color: Colors.green);
 
@@ -221,6 +231,7 @@ class MyListView1 extends StatelessWidget {
       separatorBuilder: (BuildContext context, int index) {
         return index % 2 == 0 ? divider1 : divider2;
       },
+      controller: _scrollController,
       itemCount: 100,
       scrollDirection: Axis.vertical,
     );
@@ -493,8 +504,8 @@ class _MyBottomBar extends State<MyBottomBar1> {
   var selectTab = 0;
   List list1 = [
     MyHomeTab(),
-    // MyCateTab(),
-    MyCateTabControllerTab(),
+    MyCateTab(),
+    // MyCateTabControllerTab(),
     MySetTab(),
   ];
 

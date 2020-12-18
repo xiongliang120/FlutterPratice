@@ -220,20 +220,61 @@ class MyCateTab extends StatelessWidget {
                 Text("第二个item")
               ],
             ),
-            ListView(
-              children: <Widget>[
-                Text("第三个item"),
-                Text("第三个item"),
-                Text("第三个item"),
-                Text("第三个item")
-              ],
-            )
+            MyListView1()
           ],
         ),
       ),
     );
   }
 }
+
+/**
+ * 自定义ListView
+ */
+class MyListView1 extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    return _MyListView1();
+  }
+}
+
+class _MyListView1 extends State<MyListView1> {
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      print("打印滚动位置"+"${_scrollController.position.pixels}");
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget divider1 = Divider(color: Colors.blue);
+    Widget divider2 = Divider(color: Colors.green);
+
+    return ListView.separated(
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          leading: Icon(Icons.person),
+          trailing: Icon(Icons.add),
+          title: Text(
+            "$index",
+            textDirection: TextDirection.ltr,
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return index % 2 == 0 ? divider1 : divider2;
+      },
+      controller: _scrollController,
+      itemCount: 100,
+      scrollDirection: Axis.vertical,
+    );
+  }
+}
+
 
 /***
  * 通过TabController 自定义顶部导航 实现方式之二
