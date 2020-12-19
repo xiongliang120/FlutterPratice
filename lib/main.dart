@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Tab.dart';
 import 'Search.dart';
@@ -30,7 +31,8 @@ void method1() {
   runApp(Custome2(text: "111"));
   // runApp(Custome3());
   // method8();
-  method9();
+  // method9();
+  method10();
 }
 
 /**
@@ -118,10 +120,45 @@ bar() async{
 /**
  * 创建多线程, Isolate
  * https://blog.csdn.net/weixin_34051201/article/details/87961959
+ * https://blog.csdn.net/email_jade/article/details/88941434
+ *
+ * dart中Isolate 比较重量级,UI 线程和Isolate的数据传输比较复杂, flutter 为了简化代码, 封装了轻量级
+ * compulte 操作.
+ *
  */
-void concurrentMethod(){
+void method10(){
+  useCompute();
+}
+
+/**
+ * 使用Isolate 操作并发
+ */
+void useIsolate(){
 
 }
+
+/***
+ * 使用compute 操作,并发
+ */
+void useCompute() async{
+   double time1 = DateTime.now();
+   int count = await compute(countEvent,10000000);
+   var time2 = (DateTime.now()-time1);
+   print("print  耗时="+"${time2}");
+}
+
+//计算偶数的个数
+int countEvent(int num){
+   int count =0;
+   while(num > 0){
+      if(num %2 == 0){
+        count++;
+      }
+      num--;
+   }
+   return count;
+}
+
 
 
 
