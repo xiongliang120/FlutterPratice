@@ -29,8 +29,8 @@ void method1() {
 
   runApp(Custome2(text: "111"));
   // runApp(Custome3());
-  method8();
-  // method9();
+  // method8();
+  method9();
 }
 
 /**
@@ -105,7 +105,7 @@ foo() async{
   print("foo");
   String value = await bar();
   /**
-   * await 修饰函数返回Future,立马结束,并且其后的代码会被以then的方式链式放在该任务后面.
+   * await 修饰函数返回Future,立马结束,并且其后的代码(String  value, print("bar 返回${value}"))会被以then的方式链式放在该任务后面.
    */
   print("bar 返回 ${value}");
 }
