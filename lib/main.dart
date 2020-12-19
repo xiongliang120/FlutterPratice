@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:isolate';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -123,27 +124,24 @@ bar() async{
  * https://blog.csdn.net/email_jade/article/details/88941434
  *
  * dart中Isolate 比较重量级,UI 线程和Isolate的数据传输比较复杂, flutter 为了简化代码, 封装了轻量级
- * compulte 操作.
+ * compute 操作.
+ *
+ * compute 特点, 运行一次,返回一次结果
+ * isolate 特点, 使用复杂, 使用ReceivePort 进行双向通信, 可以多次返回结果.
  *
  */
-void method10(){
-  useCompute();
-}
-
-/**
- * 使用Isolate 操作并发
- */
-void useIsolate(){
-
+void method10() async{
+  // useCompute();
+  useIsolate();
 }
 
 /***
  * 使用compute 操作,并发
  */
 void useCompute() async{
-   double time1 = DateTime.now();
+   var time1 =  DateTime.now().millisecondsSinceEpoch;
    int count = await compute(countEvent,10000000);
-   var time2 = (DateTime.now()-time1);
+   var time2 = (DateTime.now().millisecondsSinceEpoch-time1);
    print("print  耗时="+"${time2}");
 }
 
@@ -159,6 +157,34 @@ int countEvent(int num){
    return count;
 }
 
+/**
+ * 使用Isolate 操作并发
+ */
+void  useIsolate() async{
+  var time1 =  DateTime.now().millisecondsSinceEpoch;
+  await isolateCountEven(10000000);
+  var time2 = (DateTime.now().millisecondsSinceEpoch-time1);
+  print("print  耗时="+"${time2}");
+}
+
+Future<dynamic> isolateCountEven(int num) async {
+  var response = ReceivePort();
+  await Isolate.spawn(countEvent2, response.sendPort);
+  var sendPort = await response.first;
+  var answer = ReceivePort();
+  sendPort.send([answer.sendPort,num]);
+  return answer.first;
+}
+
+void countEvent2(SendPort port){
+  var rPort = ReceivePort();
+  port.send(rPort.sendPort);
+  rPort.listen((message) {
+     var send = message[0] as SendPort;
+     var n = message[1] as int;
+     send.send(countEvent(n));
+  });
+}
 
 
 
