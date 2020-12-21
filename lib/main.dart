@@ -119,7 +119,7 @@ bar() async{
 }
 
 /**
- * 创建多线程, Isolate
+ * 创建多线程, Isolate,Flutter 默认是Root Isolate(即主线程)
  * https://blog.csdn.net/weixin_34051201/article/details/87961959
  * https://blog.csdn.net/email_jade/article/details/88941434
  *
@@ -161,9 +161,9 @@ int countEvent(int num){
  * 使用Isolate 操作并发
  */
 void  useIsolate() async{
-  var time1 =  DateTime.now().millisecondsSinceEpoch;
+  int time1 =  DateTime.now().millisecondsSinceEpoch;
   await isolateCountEven(10000000);
-  var time2 = (DateTime.now().millisecondsSinceEpoch-time1);
+  int time2 = (DateTime.now().millisecondsSinceEpoch-time1);
   print("print  耗时="+"${time2}");
 }
 
