@@ -364,12 +364,39 @@ class MyListView1 extends StatefulWidget{
 class _MyListView1 extends State<MyListView1> {
   ScrollController _scrollController = ScrollController();
 
+  /**
+   * 生命周期函数
+   */
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(() {
          print("打印滚动位置"+"${_scrollController.offset}");
     });
+  }
+
+  /***
+   * 生命周期函数
+   */
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void didUpdateWidget(covariant MyListView1 oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void setState(fn) {
+    super.setState(fn);
   }
 
   @override
@@ -395,6 +422,22 @@ class _MyListView1 extends State<MyListView1> {
       itemCount: 100,
       scrollDirection: Axis.vertical,
     );
+  }
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void deactivate() {
+    super.deactivate();
+  }
+
+  /***
+   * 生命周期函数
+   */
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 
