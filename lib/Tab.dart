@@ -234,7 +234,6 @@ class MyCateTab extends StatelessWidget {
 class MyListView1 extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    print("打印 createState");
     return _MyListView1();
   }
 }
@@ -242,48 +241,16 @@ class MyListView1 extends StatefulWidget{
 class _MyListView1 extends State<MyListView1> {
   ScrollController _scrollController = ScrollController();
 
-  /**
-   * 生命周期函数
-   */
   @override
   void initState() {
     super.initState();
-    print("打印 initState");
     _scrollController.addListener(() {
       print("打印滚动位置"+"${_scrollController.offset}");
     });
   }
 
-  /***
-   * 生命周期函数
-   */
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    print("打印 didChangeDependencies");
-  }
-
-  /**
-   * 生命周期函数
-   */
-  @override
-  void didUpdateWidget(covariant MyListView1 oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    print("打印 didUpdateWidget");
-  }
-
-  /**
-   * 生命周期函数
-   */
-  @override
-  void setState(fn) {
-    super.setState(fn);
-    print("打印 setState");
-  }
-
   @override
   Widget build(BuildContext context) {
-    print("打印 build");
     Widget divider1 = Divider(color: Colors.blue);
     Widget divider2 = Divider(color: Colors.green);
 
@@ -307,6 +274,70 @@ class _MyListView1 extends State<MyListView1> {
     );
   }
 
+}
+
+
+/***
+ * 通过TabController 自定义顶部导航 实现方式之二
+ * 采用 TabController实现
+ */
+class MyCateTabControllerTab extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    print("打印 createState");
+    return _MyCateTabControllerTab1();
+  }
+}
+
+class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
+    with SingleTickerProviderStateMixin {
+  GlobalKey globalKey = GlobalKey();
+
+  TabController tabController;
+  var images = ["imgs/avatar.png", "imgs/avatar1.png", "imgs/avatar2.png"];
+  var tabName = "initName";
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void initState() {
+    super.initState();
+    print("打印 initState");
+    tabController = new TabController(length: 3, vsync: this);
+    tabController.addListener(() {
+      print(tabController.index);
+    });
+  }
+
+  /***
+   * 生命周期函数
+   */
+  @override
+  void didChangeDependencies() {
+    print("打印 didChangeDependencies");
+    super.didChangeDependencies();
+  }
+
+
+  /***
+   * 生命周期函数
+   */
+  @override
+  void didUpdateWidget(covariant MyCateTabControllerTab oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("打印 didUpdateWidget");
+  }
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void setState(fn) {
+    super.setState(fn);
+    print("打印 setState");
+  }
+
   /**
    * 生命周期函数
    */
@@ -324,43 +355,30 @@ class _MyListView1 extends State<MyListView1> {
     super.dispose();
     print("打印 dispose");
   }
-}
 
+  /***
+   * 获取控件的大小和布局
+   */
+  void getRenderObjectSize(){
+     RenderBox renderBox = globalKey.currentContext.findRenderObject();
+     if(renderBox != null){
+       print(renderBox.size);
 
-/***
- * 通过TabController 自定义顶部导航 实现方式之二
- * 采用 TabController实现
- */
-class MyCateTabControllerTab extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _MyCateTabControllerTab1();
-  }
-}
-
-class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
-    with SingleTickerProviderStateMixin {
-  TabController tabController;
-  var images = ["imgs/avatar.png", "imgs/avatar1.png", "imgs/avatar2.png"];
-
-  @override
-  void dispose() {
-    //组件销毁
-    super.dispose();
-    tabController.dispose();
+       print(renderBox.localToGlobal(Offset.zero));
+     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    tabController = new TabController(length: 3, vsync: this);
-    tabController.addListener(() {
-      print(tabController.index);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    print("打印 build");
+    context.findRenderObject();
+    context.widget;
+
+    Future.delayed(Duration(seconds: 2),(){
+      getRenderObjectSize();
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -369,7 +387,7 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
               child: TabBar(
                 controller: tabController,
                 tabs: <Widget>[
-                  Tab(text: "第一个"),
+                  Tab(text: "第一个",key: globalKey ),
                   Tab(text: "第二个"),
                   Tab(text: "第三个"),
                 ],
@@ -382,7 +400,23 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
         controller: tabController,
         children: <Widget>[
           Center(child: Text("第一个")),
-          Center(child: Text("第二个")),
+          Container(
+            child: Column(
+              children: [
+                Text(
+                   "$tabName"
+                ),
+
+                RaisedButton(
+                    child: Text("更新文本"),
+                    onPressed: (){
+                        setState(() {
+                           tabName = "更新文本内容";
+                        });
+                    }),
+              ],
+            ),
+          ),
           Container(
             height: 200,
             child: AspectRatio(

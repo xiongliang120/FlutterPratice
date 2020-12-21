@@ -705,11 +705,12 @@ class MyBottomBar1 extends StatefulWidget {
 
 class _MyBottomBar extends State<MyBottomBar1> {
   var selectTab = 0;
+
   List list1 = [
     MyHomeTab(),
     MyCateTab(),
-    // MyCateTabControllerTab(),
-    MySetTab(),
+    MyCateTabControllerTab()
+    // MySetTab(),
   ];
 
   @override
