@@ -234,6 +234,7 @@ class MyCateTab extends StatelessWidget {
 class MyListView1 extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
+    print("打印 createState");
     return _MyListView1();
   }
 }
@@ -241,16 +242,48 @@ class MyListView1 extends StatefulWidget{
 class _MyListView1 extends State<MyListView1> {
   ScrollController _scrollController = ScrollController();
 
+  /**
+   * 生命周期函数
+   */
   @override
   void initState() {
     super.initState();
+    print("打印 initState");
     _scrollController.addListener(() {
-      print("打印滚动位置"+"${_scrollController.position.pixels}");
+      print("打印滚动位置"+"${_scrollController.offset}");
     });
+  }
+
+  /***
+   * 生命周期函数
+   */
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("打印 didChangeDependencies");
+  }
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void didUpdateWidget(covariant MyListView1 oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("打印 didUpdateWidget");
+  }
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void setState(fn) {
+    super.setState(fn);
+    print("打印 setState");
   }
 
   @override
   Widget build(BuildContext context) {
+    print("打印 build");
     Widget divider1 = Divider(color: Colors.blue);
     Widget divider2 = Divider(color: Colors.green);
 
@@ -272,6 +305,24 @@ class _MyListView1 extends State<MyListView1> {
       itemCount: 100,
       scrollDirection: Axis.vertical,
     );
+  }
+
+  /**
+   * 生命周期函数
+   */
+  @override
+  void deactivate() {
+    super.deactivate();
+    print("打印 deactivate");
+  }
+
+  /***
+   * 生命周期函数
+   */
+  @override
+  void dispose() {
+    super.dispose();
+    print("打印 dispose");
   }
 }
 
