@@ -4,6 +4,7 @@ import 'package:flutter_app/network.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'CustomeDialog.dart';
 import 'package:toast/toast.dart';
+import 'Animation.dart';
 
 class MyHomeTab extends StatelessWidget {
   @override
@@ -289,6 +290,9 @@ class MyCateTabControllerTab extends StatefulWidget {
   }
 }
 
+/**
+ * 继承 SingleTickerProviderStateMixin, 用于Controller 所需的参数.
+ */
 class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
     with SingleTickerProviderStateMixin {
   GlobalKey globalKey = GlobalKey();
@@ -403,22 +407,28 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
       body: TabBarView(
         controller: tabController,
         children: <Widget>[
-          Center(child: Text("第一个")),
+          Container(
+            child: Column(
+              children: [
+                Text("第一个"),
+              ],
+            ),
+          ),
           Container(
             height: 300,
             width: 300,
-            child: Listener( //解决滑动冲突, 通过Listener解决
-              onPointerDown: (details){
-                  print("打印down");
-              },
-
-              onPointerUp: (details){
-                 print("打印up");
-              },
-
-              onPointerMove: (details){
-                print("打印move ${details.orientation} 滑动距离 ${details.delta}");
-              },
+            // child: Listener( //解决滑动冲突, 通过Listener解决
+            //   onPointerDown: (details){
+            //       print("打印down");
+            //   },
+            //
+            //   onPointerUp: (details){
+            //      print("打印up");
+            //   },
+            //
+            //   onPointerMove: (details){
+            //     print("打印move ${details.orientation} 滑动距离 ${details.delta}");
+            //   },
 
               child:   GestureDetector(
                 child : Column(
@@ -436,23 +446,23 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
                         }),
                   ],
                 ),
-                onPanDown: (DragDownDetails drag){  //手指按下时触发回调
-                  print("手指按下时触发回调 ${drag.localPosition}");
-                },
-                onPanUpdate: (DragUpdateDetails  drag){ //手指滑动时触发回调
-                  print("手指滑动时触发回调 ${drag.localPosition}");
-                },
-                onPanEnd: (DragEndDetails drag){ //手指滑动结束时触发回调
-                  print("手指滑动结束时触发回调 ${drag.velocity}");
-                },
-                // onHorizontalDragUpdate: (DragUpdateDetails drag){ //手指水平方向滑动时触发回调
-                //   print("手指水平方向滑动时触发回调 ${drag.localPosition}");
+                // onPanDown: (DragDownDetails drag){  //手指按下时触发回调
+                //   print("手指按下时触发回调 ${drag.localPosition}");
                 // },
-                onVerticalDragUpdate: (DragUpdateDetails drag){
-                  print("手指垂直滑动");
-                },
+                // onPanUpdate: (DragUpdateDetails  drag){ //手指滑动时触发回调
+                //   print("手指滑动时触发回调 ${drag.localPosition}");
+                // },
+                // onPanEnd: (DragEndDetails drag){ //手指滑动结束时触发回调
+                //   print("手指滑动结束时触发回调 ${drag.velocity}");
+                // },
+                // // onHorizontalDragUpdate: (DragUpdateDetails drag){ //手指水平方向滑动时触发回调
+                // //   print("手指水平方向滑动时触发回调 ${drag.localPosition}");
+                // // },
+                // onVerticalDragUpdate: (DragUpdateDetails drag){
+                //   print("手指垂直滑动");
+                // },
               ),
-            )
+            // )
           ),
           Container(
             height: 200,
@@ -492,7 +502,8 @@ class MySetTab extends StatelessWidget {
               //路由替换, 会将当前路径替换为login_page
               Navigator.pushReplacementNamed(context, "login_page");
             },
-          )
+          ),
+          CustomeAnimationStateWidget()
         ],
       )),
     );
