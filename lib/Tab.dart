@@ -364,7 +364,7 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
      if(renderBox != null){
        print(renderBox.size);
 
-       print(renderBox.localToGlobal(Offset.zero));
+       print(renderBox.localToGlobal(Offset.zero));//获取控件坐标
      }
   }
 
