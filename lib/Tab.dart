@@ -365,6 +365,10 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
        print(renderBox.size);
 
        print(renderBox.localToGlobal(Offset.zero));//获取控件坐标
+
+       //触发布局, 触发绘制
+       renderBox.markNeedsLayout();
+       renderBox.markNeedsPaint();
      }
   }
 
@@ -401,21 +405,47 @@ class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
         children: <Widget>[
           Center(child: Text("第一个")),
           Container(
-            child: Column(
-              children: [
-                Text(
-                   "$tabName"
-                ),
+            height: 300,
+            width: 300,
+            child: Listener(
+              onPointerDown: (details){
+                  print("打印down");
+              },
 
-                RaisedButton(
-                    child: Text("更新文本"),
-                    onPressed: (){
-                        setState(() {
-                           tabName = "更新文本内容";
-                        });
-                    }),
-              ],
-            ),
+              onPointerUp: (details){
+                 print("打印up");
+              },
+
+              child:   GestureDetector(
+                child : Column(
+                  children: [
+                    Text(
+                        "$tabName"
+                    ),
+
+                    RaisedButton(
+                        child: Text("更新文本"),
+                        onPressed: (){
+                          setState(() {
+                            tabName = "更新文本内容";
+                          });
+                        }),
+                  ],
+                ),
+                onPanDown: (DragDownDetails drag){  //手指按下时触发回调
+                  print("手指按下时触发回调 ${drag.localPosition}");
+                },
+                onPanUpdate: (DragUpdateDetails  drag){ //手指滑动时触发回调
+                  print("手指滑动时触发回调 ${drag.localPosition}");
+                },
+                onPanEnd: (DragEndDetails drag){ //手指滑动结束时触发回调
+                  print("手指滑动结束时触发回调 ${drag.velocity}");
+                },
+                onHorizontalDragUpdate: (DragUpdateDetails drag){ //手指水平方向滑动时触发回调
+                  print("手指水平方向滑动时触发回调 ${drag.localPosition}");
+                },
+              ),
+            )
           ),
           Container(
             height: 200,
