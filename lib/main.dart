@@ -37,6 +37,8 @@ void method1() {
 }
 
 /**
+ * 优先处理微任务队列中所有微任务
+ * 微任务队列处理完毕后,从事件队列获取一个任务进行处理, 循环上诉步骤.
  *
  * 事件队列, 包含外部事件,例如I/O, Timer,绘制事件等
  * 微任务队列, 包含dart内部的微任务,主要通过scheduleMicrotask来调度.
@@ -125,6 +127,9 @@ bar() async{
  *
  * dart中Isolate 比较重量级,UI 线程和Isolate的数据传输比较复杂, flutter 为了简化代码, 封装了轻量级
  * compute 操作.
+ *
+ * Isolate：通过spawn获取新的Isolate对象, 两个Isolate之间使用SendPort相互发送消息,而Isolate 也存在
+ * 一个与之对应的ReceivePort用来接收消息.
  *
  * compute 特点, 运行一次,返回一次结果
  * isolate 特点, 使用复杂, 使用ReceivePort 进行双向通信, 可以多次返回结果.
