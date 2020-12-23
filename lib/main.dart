@@ -193,6 +193,10 @@ void countEvent2(SendPort port){
  * MethodChannel: 用于传递方法调用一次性通信
  * EventChannel: 用于数据流的通信,持续通信,收到消息后无法回复消息,用于手机电量变化,网络变化.
  *
+ * 常用 MethodChannel, Native端的调用需要在主线程中执行.
+ * flutter端创建 MethodChannle, Native 端创建的MethodChannel 与之同名.
+ * 通过methodChannel.invokeMethod() 调用相应的方法并传递参数,通过await 异步获取返回结果.
+ *
  */
 void method11(){
 
