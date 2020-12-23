@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 
 /**
  * 动画实现, 补间动画
+ * 涉及 Animation, Curve, Controller, Tween
+ * Animation: 保存动画的插值
+ * Curve: 设置动画的曲线, 匀速和非匀速
+ * Controller: 控制动画的开始,结束, 反转
+ * Tween: 根据插值计算出的值。
+ *
  */
 class CustomeAnimationStateWidget extends StatefulWidget {
   @override
