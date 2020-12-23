@@ -15,12 +15,13 @@ class _CustomeAnimationStateFul extends State<CustomeAnimationStateWidget>
   AnimationController controller;
   Animation animation;
   Animation<int> intAnim;
+  Animation<Color> colorAnim;
   @override
   initState() {
     super.initState();
     //控制动画,forward,stop, reverse.
     controller = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
+        duration: const Duration(milliseconds: 2000), vsync: this);
     controller.addListener((){ //帧监听器
       print("controller=====${controller.value}");
     });
@@ -35,6 +36,9 @@ class _CustomeAnimationStateFul extends State<CustomeAnimationStateWidget>
         setState(() { //帧状态改变后,通过setState触发UI重建
         });
       });
+
+    colorAnim = ColorTween(begin: Colors.blue,end: Colors.red).animate(animation);
+
     controller.forward();
   }
   @override
@@ -47,7 +51,7 @@ class _CustomeAnimationStateFul extends State<CustomeAnimationStateWidget>
     return  Container(
             width: intAnim.value.toDouble(),
             height: intAnim.value.toDouble(),
-            color: Colors.blue,
+            color: colorAnim.value,
           );
   }
 }
