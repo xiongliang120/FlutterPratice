@@ -116,6 +116,7 @@ void method3(){
  */
 void method4(String name,[int age=10]){
    print(name);
+   print("打印age=${age}");
 }
 
 method4x(){

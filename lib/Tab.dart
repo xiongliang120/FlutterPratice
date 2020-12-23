@@ -296,6 +296,16 @@ class MyCateTabControllerTab extends StatefulWidget {
  * Dart 为了支持多重继承,引入mixin关键字, 特殊之处是,mixin 定义的类不能有构造方法,
  *这样可以避免继承多个类而产生的父类构造方法冲突。
  * (mixi类与abstract类似,不能实例化, 相同的方法会被覆盖, 并且with后面的回覆盖前面的,mixin类与with 结合使用)
+ *
+ *
+ * StatefulWidget 生命周期
+ * initState(),初始化State
+ * didChangeDependencies(), initState之后调用,可以获取其他State
+ * build(), 构建Widget
+ * deactivate(), 当Widget从 视图树中移除
+ * dispose(), Widget 销毁
+ *
+ *
  */
 class _MyCateTabControllerTab1 extends State<MyCateTabControllerTab>
     with SingleTickerProviderStateMixin {
