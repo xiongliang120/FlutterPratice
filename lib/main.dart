@@ -186,6 +186,17 @@ void countEvent2(SendPort port){
   });
 }
 
+/**
+ * Flutter 与 Native 之间通信
+ *
+ * BasicMessageChannel:  用于传递字符串和半结构化的信息,持续通信,收到消息后可以回复消息。
+ * MethodChannel: 用于传递方法调用一次性通信
+ * EventChannel: 用于数据流的通信,持续通信,收到消息后无法回复消息,用于手机电量变化,网络变化.
+ *
+ */
+void method11(){
+
+}
 
 
 
