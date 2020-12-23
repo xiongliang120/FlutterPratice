@@ -4,7 +4,8 @@ void main(){
   // method2();
   //  method3();
   //  method5(method4x());
-   method6();
+  //  method6();
+   method8();
 }
 
 
@@ -160,6 +161,42 @@ class Person{
    }
 }
 
+
+/**
+ * 测试Switch
+ */
+void method8(){
+  var num = 1;
+  Switch(num){
+     case 1:
+        pritn("1");
+     case 2:
+        print("2");
+     case 3:
+        print("3");
+  }
+}
+
+/**
+ * 测试Switch
+ */
+void method9(){
+   var num = 1;
+   switch(num){
+      case 1:{
+         print("1");
+         break;
+      }
+      case 2:{
+         print("2");
+         break;
+      }
+      case 3:{
+         print("3");
+         break;
+      }
+   }
+}
 
 
 
